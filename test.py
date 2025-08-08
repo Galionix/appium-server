@@ -36,7 +36,6 @@ options.full_reset = False
 
 options.udid = "6d834b8d0421"
 # подключение
-from appium import webdriver
 remote = webdriver.__dict__.get("Remote")  # Получаем Remote из appium.webdriver
 # driver = Remote("http://127.0.0.1:4723", options=options)
 driver = remote("http://127.0.0.1:4723", options=options)
