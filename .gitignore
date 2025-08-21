@@ -1,3 +1,5 @@
 venv/pyvenv.cfg
 venv/Lib
 venv/Scripts
+*/**/__pycache__
+automation_platform/core/__pycache__/device_manager.cpython-311.pyc

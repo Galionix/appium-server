@@ -4,10 +4,25 @@
 
 from typing import List
 from fastapi import FastAPI, HTTPException
-from automation_platform.core.device_manager import get_connected_devices, restart_device, debug_screen_dump
+from automation_platform.core.device_manager import get_connected_devices, restart_device, debug_screen_dump, get_screen_xml
 from automation_platform.core.appium_connector import get_driver
 from fastapi import Body
+from fastapi.responses import Response
+
+
 app = FastAPI()
+
+@app.get("/devices/{device_id}/screen_xml")
+def screen_xml_endpoint(device_id: str):
+    """Возвращает XML-дом экрана устройства как текст"""
+    try:
+        driver = get_driver(device_id)
+        xml = get_screen_xml(driver)
+        driver.quit()
+        return Response(content=xml, media_type="application/xml")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ошибка получения screen xml: {e}")
+
 
 @app.get("/devices/{device_id}/screen_dump")
 def screen_dump_endpoint(device_id: str):

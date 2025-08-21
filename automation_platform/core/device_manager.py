@@ -1,5 +1,16 @@
 # ...existing code...
 
+def get_screen_xml(driver):
+    """
+    Возвращает XML-дом экрана устройства
+    """
+    try:
+        return driver.page_source
+    except Exception as e:
+        print(f"Ошибка получения XML: {e}")
+        return ""
+# ...existing code...
+
 def debug_screen_dump(driver):
     """
     Возвращает список всех элементов на экране с их атрибутами для дебага.
