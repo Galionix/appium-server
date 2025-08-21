@@ -21,8 +21,8 @@ capabilities = {
     "platformName": "Android",  # Standard capability
     "appium:automationName": "uiautomator2",  # Note the prefix
     "appium:deviceName": "MyPhone",
-    "appium:appPackage": "com.android.settings",
-    "appium:appActivity": ".Settings",
+    # "appium:appPackage": "com.android.settings",
+    # "appium:appActivity": ".Settings",
     "appium:noReset": True,
     
         # Увеличиваем таймауты
