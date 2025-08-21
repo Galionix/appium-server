@@ -6,6 +6,7 @@ from typing import List
 from fastapi import FastAPI, HTTPException
 from automation_platform.core.device_manager import get_connected_devices, restart_device, debug_screen_dump, get_screen_xml
 from automation_platform.core.appium_connector import get_driver
+from automation_platform.utils.device_utils import open_app_drawer
 from fastapi import Body
 from fastapi.responses import Response
 
@@ -35,6 +36,16 @@ def screen_dump_endpoint(device_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ошибка получения screen dump: {e}")
 
+@app.post("/devices/{device_id}/test_open_app_drawer")
+def test_open_app_drawer_endpoint(device_id: str):
+    """Тестовый эндпоинт: открывает список приложений на устройстве (home, свайп, поиск)"""
+    try:
+        driver = get_driver(device_id)
+        open_app_drawer(driver)
+        driver.quit()
+        return {"status": "success", "device_id": device_id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ошибка выполнения open_app_drawer: {e}")
 
 @app.post("/devices/{device_id}/restart")
 def restart_device_endpoint(device_id: str):

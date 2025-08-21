@@ -109,3 +109,6 @@
 ---
 
 
+
+запуск
+uvicorn automation_platform.api.web_api:app --reload
