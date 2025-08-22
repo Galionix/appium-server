@@ -6,6 +6,7 @@ from xml.etree import ElementTree
 
 from automation_platform.apps.instagram.navigation.dm_feed import dm_feed
 from automation_platform.apps.instagram.navigation.feed_dm import feed_dm
+from automation_platform.utils.need_screen import ScreenDef
 
 # --- Экран: Главная (фид) ---
 def is_feed_screen(xml: str) -> bool:
@@ -28,29 +29,48 @@ def is_dm_screen(xml: str) -> bool:
 
 # --- Тестовый словарь для примера ---
 TEST_SCREEN_DICT = {
-    'feed': {
-        'resource-id': 'com.instagram.android:id/tab_bar',
-        'desc': 'Главная страница (фид)',
-        'check': is_feed_screen,
-        'transitions': {
+    # 'feed': {
+    #     'resourceId': 'com.instagram.android:id/tab_bar',
+    #     'desc': 'Главная страница (фид)',
+    #     'check': is_feed_screen,
+    #     'transitions': {
+    #         'to_dm': feed_dm,
+    #         'to_profile': 'profile',
+    #         # Добавьте другие переходы по необходимости
+    #     }
+    # },
+    'feed': ScreenDef(
+        resourceId='com.instagram.android:id/tab_bar',
+        desc='Главная страница (фид)',
+        check=is_feed_screen,
+        transitions={
             'to_dm': feed_dm,
-            'to_profile': 'profile',
+            # 'to_profile': 'profile',
             # Добавьте другие переходы по необходимости
         }
-    },
-    'dm': {
-        'resource-id': 'com.instagram.android:id/direct_thread_list_recycler_view',
-        'desc': 'Личные сообщения',
-        'check': is_dm_screen,
-        'transitions': {
+    ),
+    'dm': ScreenDef(
+        resourceId='com.instagram.android:id/direct_thread_list_recycler_view',
+        desc='Личные сообщения',
+        check=is_dm_screen,
+        transitions={
             'to_feed': dm_feed,
             # Добавьте другие переходы по необходимости
         }
-    },
-    'dm_button': {
-        'resource-id': 'com.instagram.android:id/action_bar_inbox_button',
-        'desc': 'Кнопка входящих сообщений',
-        'check': None,
-        'transitions': {}
-    }
+    ),
+    # 'dm': {
+    #     'resourceId': 'com.instagram.android:id/direct_thread_list_recycler_view',
+    #     'desc': 'Личные сообщения',
+    #     'check': is_dm_screen,
+    #     'transitions': {
+    #         'to_feed': dm_feed,
+    #         # Добавьте другие переходы по необходимости
+    #     }
+    # },
+    # 'dm_button': {
+    #     'resourceId': 'com.instagram.android:id/action_bar_inbox_button',
+    #     'desc': 'Кнопка входящих сообщений',
+    #     'check': None,
+    #     'transitions': {}
+    # }
 }
