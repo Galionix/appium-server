@@ -7,7 +7,7 @@ from automation_platform.utils.app_list_utils import click_child_by_selectors_an
 import time
 
 
-def open_app_drawer(driver: WebDriver):
+def open_app(driver: WebDriver, appname: str):
     """
     Открывает список приложений на устройстве:
     1. Нажимает кнопку Home
@@ -44,7 +44,7 @@ def open_app_drawer(driver: WebDriver):
 
 
     # 4. Ввести текст 'instagram' в активное поле
-    driver.execute_script("mobile: type", {"text": "instagram"})
+    driver.execute_script("mobile: type", {"text": appname})
     time.sleep(0.5)
 
     # 5. Открыть первое приложение в списке
@@ -69,3 +69,9 @@ def open_app_drawer(driver: WebDriver):
 # Пример использования:
 # from automation_platform.utils.device_utils import open_app_drawer
 # open_app_drawer(driver)
+def validate_screen(check_func, driver, screen_name):
+    """
+    Валидирует, что мы на нужном экране. Если нет — кидает ошибку.
+    """
+    if not check_func(driver.page_source):
+        raise RuntimeError(f"Screen validation failed: not on '{screen_name}' (check function {check_func.__name__})")
