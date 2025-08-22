@@ -16,7 +16,7 @@ def test_scenario(driver):
     Открывает Instagram, ждёт загрузки, проверяет, что открыт фид.
     Возвращает результат проверки.
     """
-    # open_app(driver, "instagram")
+    open_app(driver, "instagram")
     time.sleep(5)  # Ждем открытия приложения
     need_screen(driver, TEST_SCREEN_DICT, 'feed')
     time.sleep(1)  # Дополнительная задержка для стабильности
